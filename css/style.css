@@ -1,0 +1,10 @@
+@charset "utf-8";
+
+.error-list li {
+  list-style: none;
+  color: red;
+}
+
+.tweet-list li {
+  list-style: none;
+}
