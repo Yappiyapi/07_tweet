@@ -13,10 +13,11 @@ $stmt->execute();
 
 $tweets = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$tweet) {
-  header('Location: index.php');
-  exit;
-}
+// if(!$tweet) {
+//   header('Location: index.php');
+//   exit;
+// }
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $content = $_POST['content'];
@@ -24,7 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // バリデーション
   if ($content == '') {
-    $errors['content'] = 'ツイート内容を入力してください。';
+    $errors['content'] = '本文を入力してください。';
+  }
+
+  if ($content == $tweets['content']) {
+    $errors['content'] = '本文の内容を変更してください。';
   }
 
   if (empty($errors)) {

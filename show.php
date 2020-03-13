@@ -13,10 +13,7 @@ $stmt->execute();
 
 $tweets = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$tweet) {
-  header('Location: index.php');
-  exit;
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -25,15 +22,21 @@ if (!$tweet) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Tweetアプリ</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1><?php echo h($tweet['content']); ?></h1>
+  <h1><?php echo h($tweets['content']); ?></h1>
   <a href="index.php">戻る</a>
   <ul class="tweet-list">
     <li>
-      [#<?php echo h($tweet['id']); ?>]
-      <?php echo h($tweet['content']); ?><br>
-      投稿日時: <?php echo h($tweet['created_at']); ?>
+      [#<?php echo h($tweets['id']); ?>]
+      <?php echo h($tweets['content']); ?><br>
+      投稿日時: <?php echo h($tweets['created_at']); ?>
+      <?php if($tweet['good'] == false) : ?>
+        <a href="good.php?id=<?php echo h($tweet['id']) . "&good=1"; ?>" class="good-link"><?php echo '☆'; ?></a>
+      <?php else : ?>
+        <a href="good.php?id=<?php echo h($tweet['id']) . "&good=0"; ?>" class="bad-link"><?php echo '★'; ?></a>
+      <?php endif; ?>
       <a href="edit.php?id=<?php echo h($tweet['id']); ?>">[編集]</a>
       <a href="delete.php?id=<?php echo h($tweet['id']); ?>">[削除]</a>
       <hr>

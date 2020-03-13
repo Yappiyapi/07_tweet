@@ -11,7 +11,7 @@ $stmt = $dbh->prepare($sql);
 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 $stmt->execute();
 
-$tweets = $stmt->fetch(PDO::FETCH_ASSOC);
+$tweets = $stmt->fetch();
 
 if (!$tweet) {
   header('Location: index.php');
@@ -20,7 +20,8 @@ if (!$tweet) {
 
 $sql_delete = "delete from tweets where id = :id";
 $stmt_delete = $dbh->prepare($sql_delete);
-$stmt_delete->bindParam($sql_delete);
+$stmt_delete->bindParam(":id", $id);
 $stmt_delete->execute();
 
 header('Location: index.php');
+exit;
