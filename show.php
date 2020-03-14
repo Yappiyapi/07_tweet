@@ -11,7 +11,7 @@ $stmt = $dbh->prepare($sql);
 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 $stmt->execute();
 
-$tweets = $stmt->fetch(PDO::FETCH_ASSOC);
+$tweet = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
 ?>
@@ -25,13 +25,13 @@ $tweets = $stmt->fetch(PDO::FETCH_ASSOC);
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h1><?php echo h($tweets['content']); ?></h1>
+  <h1><?php echo h($tweet['content']); ?></h1>
   <a href="index.php">戻る</a>
   <ul class="tweet-list">
     <li>
-      [#<?php echo h($tweets['id']); ?>]
-      <?php echo h($tweets['content']); ?><br>
-      投稿日時: <?php echo h($tweets['created_at']); ?>
+      [#<?php echo h($tweet['id']); ?>]
+      <?php echo h($tweet['content']); ?><br>
+      投稿日時: <?php echo h($tweet['created_at']); ?>
       <?php if($tweet['good'] == false) : ?>
         <a href="good.php?id=<?php echo h($tweet['id']) . "&good=1"; ?>" class="good-link"><?php echo '☆'; ?></a>
       <?php else : ?>

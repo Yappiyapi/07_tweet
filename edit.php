@@ -11,7 +11,7 @@ $stmt = $dbh->prepare($sql);
 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
 $stmt->execute();
 
-$tweets = $stmt->fetch(PDO::FETCH_ASSOC);
+$tweet = $stmt->fetch(PDO::FETCH_ASSOC);
 
 // if(!$tweet) {
 //   header('Location: index.php');
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $errors['content'] = '本文を入力してください。';
   }
 
-  if ($content == $tweets['content']) {
+  if ($content == $tweet['content']) {
     $errors['content'] = '本文の内容を変更してください。';
   }
 
