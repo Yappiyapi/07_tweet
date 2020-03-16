@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   $stmt->execute();  
   $tweet = $stmt->fetch();
 
-  header('Location: index.php');
+  $page = $_SERVER['HTTP_REFERER'];
+  header('Location:' . $page);
 exit;
 }
